@@ -3,12 +3,15 @@ django-memcache-status
 ======================
 
 This app displays the current load and some statistics for your memcached_
-instances. At this time it's only tested with *Django 1.1* (django-trunk).
+instances. It's tested with the current *Django 1.0.2* and *Django 1.1*
+(django-trunk). 
 
 Installation
 ============
 
-Put ``memcache_status`` in your ``INSTALLED_APPS``. That's all.
+Put ``memcache_status`` in your ``INSTALLED_APPS``.
+
+That's all. Only admin-users with ``superuser`` permission can see these stats.
 
 Screenshots
 ===========

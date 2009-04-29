@@ -5,7 +5,12 @@ register = template.Library()
 
 class CacheStats(template.Node):
     def render(self, context):
-        context['cache_stats'] = sorted(cache._cache.get_stats())
+        try:
+            cache_stats =  sorted(cache._cache.get_stats())
+        # The current cache backend does not provide any statistics
+        except AttributeError:
+            cache_stats = None
+        context['cache_stats'] = cache_stats
         return ''
 
 @register.tag
