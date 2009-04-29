@@ -1,0 +1,81 @@
+{% extends "admin/index.html" %}
+
+{% load memcache_status_tags %}
+
+{% block extrahead %}
+<style type="text/css">
+div.cache_stats{
+    margin: 1em 0 2em 0;
+}
+
+div.cache_stats table{
+    width: 100%
+}
+
+div.cache_stats table tbody th,
+div.cache_stats table tbody td{
+    width: 50% !important;
+}
+
+div.cache_stats table tbody th{
+    text-align: right;
+}
+
+div.cache_stats tbody{
+    display: none;
+}
+
+div.cache_graph{
+    height: 1em;
+    width: 100%;
+    background-color: #BEEE37;
+    -webkit-box-shadow: 0.1em 0.1em 0.2em #aaa;
+    -moz-box-shadow: 0.1em 0.1em 0.2em #aaa;
+}
+
+div.cache_graph_value{
+    height: 1em;
+    background-color: #E84A2F;
+}
+
+</style>
+{% endblock %}
+
+{% block content %}
+    {% if request.user.is_superuser %}
+    <div class="cache_stats">
+    {% get_cache_stats %}
+    {% for server in cache_stats %}
+    <div class="module">
+        <table>
+        <caption>
+            <a href="#" class="section" onclick="
+                var elem = document.getElementById('cache{{ forloop.counter }}');
+                if(elem.style.display == 'none'){
+                    elem.style.display = 'table-row-group';
+                }else{
+                    elem.style.display = 'none';
+                }
+                return false;
+            ">memcached: {{ server.0 }} - {% widthratio server.1.bytes server.1.limit_maxbytes 100 %}% load</a>
+        </caption>
+        <thead>
+        <tr><td colspan="2">
+            <div class="cache_graph">
+            <div class="cache_graph_value" style="width: {% widthratio server.1.bytes server.1.limit_maxbytes 100 %}%"></div>
+            </div>
+        </td></tr>
+        </thead>
+        <tbody id="cache{{ forloop.counter }}">
+        {% for k,v in server.1.items %}
+        <tr><th>{{ k }}</th><td>{{ v }}</td></tr>
+        {% endfor %}
+        </tbody>
+        </table>
+    </div>
+    {% endfor %}
+    </div>
+    {% endif %}
+
+    {{ block.super }}
+{% endblock %}
