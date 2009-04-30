@@ -43,7 +43,7 @@ div.cache_graph_value{
 
 {% block content %}
     {% get_cache_stats %}
-    {% if cache_stats and request.user.is_superuser %}
+    {% if cache_stats and user.is_superuser %}
     <div class="cache_stats">
     {% for server in cache_stats %}
     <div class="module">
