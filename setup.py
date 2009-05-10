@@ -2,13 +2,13 @@ from setuptools import setup, find_packages
 
 setup(
     name='django-memcache-status',
-    version='0.1',
+    version='0.2',
     description='A django application that displays the load and some other statistics about your memcached instances in the admin.',
     long_description=open('README.rst').read(),
     author='Martin Mahner',
     author_email='martin@mahner.org',
     url='http://github.com/bartTC/django-memcache-status',
-    packages=find_packages(exclude=['example_project', 'example_project.*']),
+    packages=find_packages(exclude=[]),
     include_package_data=True,
     classifiers=[
         'Development Status :: 4 - Beta',

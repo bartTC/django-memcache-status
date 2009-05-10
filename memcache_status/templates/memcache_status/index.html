@@ -89,7 +89,7 @@ div.cache_graph_value{
         </td>
         </tr>
         <tr><th>{% trans "Avg GET by item" %}</th><td>{% widthratio server.1.cmd_get server.1.total_items 1 %}</td></tr>
-        <tr><th class="cache_title" colspan="2">&darr; {% trans "Detailed Statistics" %}</th></tr>
+        <tr><th class="cache_title" colspan="2">{% trans "Detailed Statistics:" %}</th></tr>
         {% for k,v in server.1.items %}
         <tr><th>{{ k|prettyname }}</th><td>{{ v }}</td></tr>
         {% endfor %}
