@@ -16,3 +16,7 @@ class CacheStats(template.Node):
 @register.tag
 def get_cache_stats(parser, token):
     return CacheStats()
+
+@register.filter
+def prettyname(name):
+    return ' '.join([word.capitalize() for word in name.split('_')])
