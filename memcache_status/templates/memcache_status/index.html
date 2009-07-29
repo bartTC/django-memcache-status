@@ -51,8 +51,6 @@ div.cache_graph_value{
     background-color: #E84A2F;
 }
 </style>
-
-{{ block.super }}
 {% endblock %}
 
 {% block content %}
@@ -98,12 +96,10 @@ div.cache_graph_value{
             <th>{% trans "Avg GET by seconds/minutes" %}</th>
             <td>{% widthratio server.1.cmd_get server.1.uptime 1 %}/{% widthratio server.1.cmd_get server.1.uptime 60 %}</td>
         </tr>
-        {% comment %}
-            Detailed Statistics
-        {% endcomment %}
+        {# ----- Detailed Statistics ----- #}
         <tr><th class="cache_title" colspan="2">{% trans "Detailed Statistics:" %}</th></tr>
         {% for k,v in server.1.items %}
-        <tr><th>{{ k|prettyname }}</th><td>{{ v }}</td></tr>
+        <tr><th>{{ k|prettyname }}</th><td>{{ v|prettyvalue:k }}</td></tr>
         {% endfor %}
         </tbody>
         </table>
