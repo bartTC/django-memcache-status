@@ -18,7 +18,7 @@ Screenshots
 
 .. image:: http://cloud.github.com/downloads/bartTC/django-memcache-status/memcache_status_1.png
 
-Overview
+Overview in your Admin index view. Allows multiple memcached instances.
 
 .. image:: http://cloud.github.com/downloads/bartTC/django-memcache-status/memcache_status_2.png
 
