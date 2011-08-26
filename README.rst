@@ -16,11 +16,11 @@ That's all. Only admin-users with ``superuser`` permission can see these stats.
 Screenshots
 ===========
 
-.. image:: http://cloud.github.com/downloads/bartTC/django-memcache-status/memcache_status_1.png
+.. image:: https://github.com/downloads/bartTC/django-memcache-status/memcache_status_1.pngg
 
 Overview in your Admin index view. Allows multiple memcached instances.
 
-.. image:: http://cloud.github.com/downloads/bartTC/django-memcache-status/memcache_status_2.png
+.. image:: https://github.com/downloads/bartTC/django-memcache-status/memcache_status_2.png
 
 Details if you click on a instance
 
