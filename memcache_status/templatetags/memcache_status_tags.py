@@ -1,5 +1,6 @@
 from django import template
-from django.core.cache import cache
+from django.core import cache
+from django.conf import settings
 
 register = template.Library()
 
@@ -8,12 +9,17 @@ class CacheStats(template.Node):
     Reads the cache stats out of the memcached cache backend. Returns `None`
     if no cache stats supported.
     """
-    def render(self, context):
+    def render(self, context):        
         try:
-            cache_stats = cache._cache.get_stats()
+            cache_stats = []
+            for cache_name in settings.CACHES.keys():
+                cache_stats += cache.get_cache(cache_name)._cache.get_stats()
         # The current cache backend does not provide any statistics
         except AttributeError:
-            cache_stats = None
+            try:
+                cache_stats = cache.cache._cache.get_stats()
+            except:
+                cache_stats = None
         context['cache_stats'] = cache_stats
         return ''
 
