@@ -11,7 +11,7 @@ class CacheStats(template.Node):
     """
     def render(self, context):
         cache_stats = []
-        for cache_backend_nm, cache_backend in CACHES.iteritems():
+        for cache_backend_nm, cache_backend in settings.CACHES.iteritems():
             try:
                 this_backend_stats = cache_backend._cache.get_stats()
                 # returns list of (name, stats) tuples
