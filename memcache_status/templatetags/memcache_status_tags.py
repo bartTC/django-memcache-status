@@ -1,5 +1,5 @@
 from django import template
-from django.core.cache import cache
+from django.core.cache import get_cache
 from django.conf import settings
 
 register = template.Library()
@@ -11,8 +11,9 @@ class CacheStats(template.Node):
     """
     def render(self, context):
         cache_stats = []
-        for cache_backend_nm, cache_backend in settings.CACHES.iteritems():
+        for cache_backend_nm, cache_backend_attrs in settings.CACHES.iteritems():
             try:
+                cache_backend = get_cache(cache_backend_nm)
                 this_backend_stats = cache_backend._cache.get_stats()
                 # returns list of (name, stats) tuples
                 for this_backend_server_name, this_backend_server_stats in this_backend_stats:
