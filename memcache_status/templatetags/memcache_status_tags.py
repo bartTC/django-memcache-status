@@ -16,8 +16,9 @@ class CacheStats(template.Node):
                 cache_backend = get_cache(cache_backend_nm)
                 this_backend_stats = cache_backend._cache.get_stats()
                 # returns list of (name, stats) tuples
-                for this_backend_server_name, this_backend_server_stats in this_backend_stats:
-                    cache_stats.append(("%s: %s" % (cache_backend_nm, this_backend_server_name), this_backend_server_stats))
+                for server_name, server_stats in this_backend_stats:
+                    cache_stats.append(("%s: %s" % (
+                        cache_backend_nm, server_name), server_stats))
             except AttributeError: # this backend probably doesn't support that
                 continue
         context['cache_stats'] = cache_stats
