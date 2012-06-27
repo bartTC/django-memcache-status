@@ -28,10 +28,6 @@ div.cache_stats table tbody th.cache_title{
     padding-top: 1em;
 }
 
-div.cache_stats tbody{
-    display: none;
-}
-
 div.cache_graph{
     height: 1em;
     width: 100%;
@@ -79,7 +75,7 @@ div.cache_graph_value{
             </div>
         </td></tr>
         </thead>
-        <tbody id="cache{{ forloop.counter }}">
+        <tbody id="cache{{ forloop.counter }}" style="display: none;">
         <tr>
             <th>{% trans "Miss Ratio" %}</th>
             <td>
