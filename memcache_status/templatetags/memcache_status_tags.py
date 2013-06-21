@@ -1,11 +1,52 @@
 from django import template
 from django.conf import settings
 from django.core.cache import get_cache
+from django.template.base import TemplateSyntaxError
+from django.template.defaulttags import WidthRatioNode
 
 if get_cache.__module__.startswith('debug_toolbar'):
     from debug_toolbar.panels.cache import base_get_cache as get_cache
 
 register = template.Library()
+
+
+class SafeWidthRatioNode(WidthRatioNode):
+    """
+    Custom ``WidthRatioNode`` template tag which stops when percentage is over
+    100% to avoid overdrawing graphs.
+    """
+    def render(self, context):
+        ratio = super(SafeWidthRatioNode, self).render(context)
+
+        if int(ratio) > 100:
+            ratio = '100'
+
+        return ratio
+
+
+@register.tag
+def safewidthratio(parser, token):
+    """
+    For creating bar charts and such, this tag calculates the ratio of a given
+    value to a maximum value, and then applies that ratio to a constant.
+
+    For example::
+
+        <img src='bar.gif' height='10' width='{% widthratio this_value max_value max_width %}' />
+
+    If ``this_value`` is 175, ``max_value`` is 200, and ``max_width`` is 100,
+    the image in the above example will be 88 pixels wide
+    (because 175/200 = .875; .875 * 100 = 87.5 which is rounded up to 88).
+    """
+    bits = token.contents.split()
+    if len(bits) != 4:
+        raise TemplateSyntaxError("widthratio takes three arguments")
+    tag, this_value_expr, max_value_expr, max_width = bits
+
+    return SafeWidthRatioNode(parser.compile_filter(this_value_expr),
+                              parser.compile_filter(max_value_expr),
+                              parser.compile_filter(max_width))
+
 
 class CacheStats(template.Node):
     """
