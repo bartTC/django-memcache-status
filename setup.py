@@ -3,15 +3,16 @@ from setuptools import setup, find_packages
 setup(
     name='django-memcache-status',
     version='1.1',
-    description='A django application that displays the load and some other statistics about your memcached instances in the admin.',
+    description='A django application that displays the load and some other '
+                'statistics about your memcached instances in the admin.',
     long_description=open('README.rst').read(),
     author='Martin Mahner',
     author_email='martin@mahner.org',
     url='http://github.com/bartTC/django-memcache-status',
-    packages=find_packages(exclude=[]),
+    packages=find_packages(),
     include_package_data=True,
     classifiers=[
-        'Development Status :: 4 - Beta',
+        'Development Status :: 5 - Production/Stable',
         'Environment :: Web Environment',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: BSD License',
@@ -20,4 +21,7 @@ setup(
         'Framework :: Django',
     ],
     zip_safe=False,
+    install_requires=[
+        'django>=1.0',
+    ]
 )
