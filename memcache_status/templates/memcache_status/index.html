@@ -72,7 +72,7 @@ div.cache_graph_value{
         <thead>
         <tr><td colspan="2">
             <div class="cache_graph">
-                <div class="cache_graph_value" style="width: {% widthratio server.1.bytes server.1.limit_maxbytes 100 %}%"></div>
+                <div class="cache_graph_value" style="width: {% safewidthratio server.1.get_misses server.1.cmd_get 100 %}%"></div>
             </div>
         </td></tr>
         </thead>
@@ -82,7 +82,7 @@ div.cache_graph_value{
             <td>
                 {% widthratio server.1.get_misses server.1.cmd_get 100 %}%
                 <div class="cache_graph inline">
-                    <div class="cache_graph_value" style="width: {% widthratio server.1.get_misses server.1.cmd_get 100 %}%"></div>
+                    <div class="cache_graph_value" style="width: {% safewidthratio server.1.get_misses server.1.cmd_get 100 %}%"></div>
                 </div>
             </td>
         </tr>
