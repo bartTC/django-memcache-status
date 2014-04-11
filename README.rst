@@ -2,7 +2,8 @@
 django-memcache-status
 ======================
 
-.. image:: https://travis-ci.org/bartTC/django-memcache-status.svg?branch=master   :target: https://travis-ci.org/bartTC/django-memcache-status
+.. image:: https://travis-ci.org/bartTC/django-memcache-status.svg?branch=master
+    :target: https://travis-ci.org/bartTC/django-memcache-status
 
 This app displays the current load and some statistics for your memcached_
 instances in the index view of your Django admin section.
