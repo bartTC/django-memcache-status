@@ -2,6 +2,8 @@
 django-memcache-status
 ======================
 
+.. image:: https://travis-ci.org/bartTC/django-memcache-status.svg?branch=master   :target: https://travis-ci.org/bartTC/django-memcache-status
+
 This app displays the current load and some statistics for your memcached_
 instances in the index view of your Django admin section.
 
@@ -28,6 +30,10 @@ Details if you click on a instance
 
 Changelog
 =========
+
+**v1.2:**
+    Unittess, several minor fixes, compatibility tests with latest Django
+    versions (Django 1.4 to 1.7).
 
 **v1.1:**
     Added support for Django's multiple cache backend setting. Kudos to Luke
