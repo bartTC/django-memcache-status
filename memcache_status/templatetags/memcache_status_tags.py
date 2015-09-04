@@ -1,10 +1,14 @@
 from django import template
 from django.conf import settings
-from django.core.cache import get_cache
+try:
+    from django.core.cache import caches
+except:
+    from django.core.cache import get_cache as caches
 
-if get_cache.__module__.startswith('debug_toolbar'):
-    from debug_toolbar.panels.cache import base_get_cache as get_cache
+if caches.__module__.startswith('debug_toolbar'):
+    from debug_toolbar.panels.cache import base_get_cache as caches
 
+get_cache = lambda cache_name: caches(cache_name) if hasattr(caches, '__call__') else caches[cache_name]
 register = template.Library()
 
 class CacheStats(template.Node):
