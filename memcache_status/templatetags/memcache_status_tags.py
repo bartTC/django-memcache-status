@@ -8,7 +8,7 @@ except:
 if caches.__module__.startswith('debug_toolbar'):
     from debug_toolbar.panels.cache import base_get_cache as caches
 
-get_cache = lambda cache_name: hasattr(caches, '__call__') and caches(cache_name) or caches[cache_name]
+get_cache = lambda cache_name: caches(cache_name) if hasattr(caches, '__call__') else caches[cache_name]
 register = template.Library()
 
 class CacheStats(template.Node):
