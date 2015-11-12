@@ -18,7 +18,7 @@ class CacheStats(template.Node):
     """
     def render(self, context):
         cache_stats = []
-        for cache_backend_nm, cache_backend_attrs in settings.CACHES.iteritems():
+        for cache_backend_nm, cache_backend_attrs in settings.CACHES.items():
             try:
                 cache_backend = get_cache(cache_backend_nm)
                 this_backend_stats = cache_backend._cache.get_stats()
