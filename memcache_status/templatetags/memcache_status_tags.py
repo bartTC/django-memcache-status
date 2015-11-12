@@ -6,7 +6,10 @@ except:
     from django.core.cache import get_cache as caches
 
 if caches.__module__.startswith('debug_toolbar'):
-    from debug_toolbar.panels.cache import base_get_cache as caches
+    try:
+        from debug_toolbar.panels.cache import base_get_cache as caches
+    except:
+        from debug_toolbar.panels.cache import get_cache as caches
 
 get_cache = lambda cache_name: caches(cache_name) if hasattr(caches, '__call__') else caches[cache_name]
 register = template.Library()
