@@ -5,28 +5,15 @@ services:
 
 python:
   - 2.7
-  # - 3.3
+  - 3.5
 
 env:
-  - DJANGO=1.4.10
-  - DJANGO=1.5.5
-  - DJANGO=1.6
-
-# matrix:
-#   exclude:
-#     - python: 3.3
-#       env: DJANGO=1.4.10
-#     - python: 3.3
-#       env: DJANGO=1.5.5
-
-branches:
-  only:
-    - master
-    - develop
+  - DJANGO=1.8.*
+  - DJANGO=1.9.*
 
 install:
-  - "pip install Django==$DJANGO"
-  - "pip install -e ."
+  - pip install django==$DJANGO
+  - pip install -e .
 
 script:
-    python runtests.py
+  - python runtests.py
