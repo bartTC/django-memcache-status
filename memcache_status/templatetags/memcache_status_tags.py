@@ -1,5 +1,10 @@
+from __future__ import unicode_literals
+
+import six
+
 from django import template
 from django.conf import settings
+
 try:
     from django.core.cache import caches
 except:
@@ -12,6 +17,7 @@ if caches.__module__.startswith('debug_toolbar'):
         from debug_toolbar.panels.cache import get_cache as caches
 
 get_cache = lambda cache_name: caches(cache_name) if hasattr(caches, '__call__') else caches[cache_name]
+
 register = template.Library()
 
 class CacheStats(template.Node):
@@ -21,7 +27,7 @@ class CacheStats(template.Node):
     """
     def render(self, context):
         cache_stats = []
-        for cache_backend_nm, cache_backend_attrs in settings.CACHES.items():
+        for cache_backend_nm, cache_backend_attrs in six.iteritems(settings.CACHES):
             try:
                 cache_backend = get_cache(cache_backend_nm)
                 this_backend_stats = cache_backend._cache.get_stats()

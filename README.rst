@@ -33,8 +33,10 @@ Changelog
 =========
 
 **v1.2:**
-    Unittess, several minor fixes, compatibility tests with latest Django
-    versions (Django 1.4 to 1.7).
+    Unittests, General code cleanup to support Django 1.8+ features such as
+    AppConfig, Django-Debugtoolbar support, Python3 Support, Compatibility tests
+    with latest supported Django versions (currently Django 1.8 and 1.9) but the
+    package is likely working with Django 1.4+.
 
 **v1.1:**
     Added support for Django's multiple cache backend setting. Kudos to Luke
