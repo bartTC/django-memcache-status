@@ -32,6 +32,9 @@ Details if you click on a instance
 Changelog
 =========
 
+**v1.3:**
+    Django 1.10 compatibility and test integration. Python 3 compatibility. 
+
 **v1.2:**
     Unittests, General code cleanup to support Django 1.8+ features such as
     AppConfig, Django-Debugtoolbar support, Python3 Support, Compatibility tests
