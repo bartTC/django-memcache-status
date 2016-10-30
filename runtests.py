@@ -27,6 +27,20 @@ SETTINGS = {
         'django.contrib.sessions.middleware.SessionMiddleware',
         'django.contrib.auth.middleware.AuthenticationMiddleware',
     ),
+    'TEMPLATES': [
+        {
+            'BACKEND': 'django.template.backends.django.DjangoTemplates',
+            'DIRS': [],
+            'APP_DIRS': True,
+            'OPTIONS': {
+                'context_processors': [
+                    'django.template.context_processors.request',
+                    'django.template.context_processors.i18n',
+                    'django.contrib.auth.context_processors.auth',
+                ],
+            },
+        },
+    ]
 }
 
 def runtests(*test_args):
