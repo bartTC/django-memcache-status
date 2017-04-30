@@ -36,14 +36,14 @@ def get_cache_stats(context):
             this_backend_stats = cache_backend._cache.get_stats()
             if not this_backend_stats:
                 logger.warning('The memcached backend "%s" does not support or '
-                    'provide stats.', cache_backend_nm)
+                    'provide stats. (Or its no memcached, or its not running.)', cache_backend_nm)
             # returns list of (name, stats) tuples
             for server_name, server_stats in this_backend_stats:
                 cache_stats.append(("%s: %s" % (
                     cache_backend_nm, server_name), server_stats))
         except AttributeError: # this backend probably doesn't support that
             logger.warning('The memcached backend "%s" does not support or '
-                'provide stats.', cache_backend_nm)
+                'provide stats.  (Or its no memcached, or its not running.)', cache_backend_nm)
     context['cache_stats'] = cache_stats
     return ''
 
