@@ -1,5 +1,6 @@
 from __future__ import unicode_literals
 
+import logging
 import six
 
 from django import template
@@ -7,50 +8,45 @@ from django.conf import settings
 
 try:
     from django.core.cache import caches
-except:
+except ImportError:
     from django.core.cache import get_cache as caches
 
 if caches.__module__.startswith('debug_toolbar'):
     try:
         from debug_toolbar.panels.cache import base_get_cache as caches
-    except:
+    except ImportError:
         from debug_toolbar.panels.cache import get_cache as caches
 
-get_cache = lambda cache_name: caches(cache_name) if hasattr(caches, '__call__') else caches[cache_name]
 
+get_cache = lambda cache_name: caches(cache_name) if hasattr(caches, '__call__') else caches[cache_name]
+logger = logging.getLogger(__name__)
 register = template.Library()
 
-class CacheStats(template.Node):
+
+@register.simple_tag(takes_context=True)
+def get_cache_stats(context):
     """
     Reads the cache stats out of the memcached cache backend. Returns `None`
     if no cache stats supported.
     """
-    def render(self, context):
-        cache_stats = []
-        for cache_backend_nm, cache_backend_attrs in six.iteritems(settings.CACHES):
-            try:
-                cache_backend = get_cache(cache_backend_nm)
-                this_backend_stats = cache_backend._cache.get_stats()
-                # returns list of (name, stats) tuples
-                for server_name, server_stats in this_backend_stats:
-                    cache_stats.append(("%s: %s" % (
-                        cache_backend_nm, server_name), server_stats))
-            except AttributeError: # this backend probably doesn't support that
-                continue
-        context['cache_stats'] = cache_stats
-        return ''
+    cache_stats = []
+    for cache_backend_nm, cache_backend_attrs in six.iteritems(settings.CACHES):
+        try:
+            cache_backend = get_cache(cache_backend_nm)
+            this_backend_stats = cache_backend._cache.get_stats()
+            if not this_backend_stats:
+                logger.warning('The memcached backend "%s" does not support or '
+                    'provide stats.', cache_backend_nm)
+            # returns list of (name, stats) tuples
+            for server_name, server_stats in this_backend_stats:
+                cache_stats.append(("%s: %s" % (
+                    cache_backend_nm, server_name), server_stats))
+        except AttributeError: # this backend probably doesn't support that
+            logger.warning('The memcached backend "%s" does not support or '
+                'provide stats.', cache_backend_nm)
+    context['cache_stats'] = cache_stats
+    return ''
 
-@register.tag
-def get_cache_stats(parser, token):
-    return CacheStats()
-
-@register.filter
-def prettyname(name):
-    return ' '.join([word.capitalize() for word in name.split('_')])
-
-@register.filter
-def prettyvalue(value, key):
-    return PrettyValue().format(key, value)
 
 class PrettyValue(object):
     """
@@ -103,3 +99,13 @@ class PrettyValue(object):
         else:
             size = '%.2fB' % bytes
         return size
+
+
+@register.filter
+def prettyname(name):
+    return ' '.join([word.capitalize() for word in name.split('_')])
+
+
+@register.filter
+def prettyvalue(value, key):
+    return PrettyValue().format(key, value)
