@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+import os
 import sys
 from django.conf import settings
 
@@ -9,13 +10,13 @@ SETTINGS = {
             'NAME': ':memory:',
         },
     },
-    'INSTALLED_APPS': (
+    'INSTALLED_APPS': [
         'memcache_status',
         'django.contrib.admin',
         'django.contrib.auth',
         'django.contrib.contenttypes',
         'django.contrib.sessions',
-    ),
+    ],
     'ROOT_URLCONF': 'memcache_status.tests.urls',
     'CACHES': {
         'default': {
@@ -23,10 +24,10 @@ SETTINGS = {
             'LOCATION': '127.0.0.1:11211',
         }
     },
-    'MIDDLEWARE_CLASSES': (
+    'MIDDLEWARE_CLASSES': [
         'django.contrib.sessions.middleware.SessionMiddleware',
         'django.contrib.auth.middleware.AuthenticationMiddleware',
-    ),
+    ],
     'TEMPLATES': [
         {
             'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -42,6 +43,14 @@ SETTINGS = {
         },
     ]
 }
+
+
+if os.getenv('TEST_WITH_DEBUGTOOLBAR', False) == 'on':
+    sys.stdout.write('Testing with django-debug-toolbar support.\n')
+    SETTINGS['INSTALLED_APPS'].insert(0, 'debug_toolbar')
+    SETTINGS['MIDDLEWARE_CLASSES'].append('debug_toolbar.middleware.DebugToolbarMiddleware')
+    SETTINGS['INTERNAL_IPS'] = ['127.0.0.1']
+
 
 def runtests(*test_args):
     # Setup settings

@@ -43,7 +43,7 @@ setup(
         'python-memcached>=1.57',
     ],
     tests_require=[
-        'tox>=1.6.1',
+        'tox>=2.0',
     ],
     cmdclass={
         'test': Tox

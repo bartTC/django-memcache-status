@@ -13,8 +13,13 @@ env:
   - DJANGO=1.9.*
   - DJANGO=1.10.*
   - DJANGO=1.11.*
+  - TEST_WITH_DEBUGTOOLBAR=on DJANGO=1.8.*
+  - TEST_WITH_DEBUGTOOLBAR=on DJANGO=1.9.*
+  - TEST_WITH_DEBUGTOOLBAR=on DJANGO=1.10.*
+  - TEST_WITH_DEBUGTOOLBAR=on DJANGO=1.11.*
 
 install:
+  - pip install django-debug-toolbar
   - pip install django==$DJANGO
   - pip install -e .
 
