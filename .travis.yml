@@ -5,6 +5,7 @@ services:
 
 python:
   - 2.7
+  - 3.4
   - 3.5
   - 3.6
 
@@ -13,10 +14,17 @@ env:
   - DJANGO=1.9.*
   - DJANGO=1.10.*
   - DJANGO=1.11.*
+  - DJANGO=2.0a1
   - TEST_WITH_DEBUGTOOLBAR=on DJANGO=1.8.*
   - TEST_WITH_DEBUGTOOLBAR=on DJANGO=1.9.*
   - TEST_WITH_DEBUGTOOLBAR=on DJANGO=1.10.*
   - TEST_WITH_DEBUGTOOLBAR=on DJANGO=1.11.*
+  - TEST_WITH_DEBUGTOOLBAR=on DJANGO=2.0a1
+
+matrix:
+  exclude:
+    - python: 2.7
+      env: DJANGO=2.0a1
 
 install:
   - pip install django-debug-toolbar
