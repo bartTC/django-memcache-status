@@ -30,10 +30,11 @@ CACHE_BACKENDS_TO_TEST = {
         'LOCATION': '127.0.0.1:11211',
     },
 
-    'django-pymemcache': {
-        'BACKEND': 'djpymemcache.backend.PyMemcacheCache',
-        'LOCATION': '127.0.0.1:11211',
-    },
+    # pymemcache does not provide any stats.
+    # 'django-pymemcache': {
+    #     'BACKEND': 'djpymemcache.backend.PyMemcacheCache',
+    #     'LOCATION': '127.0.0.1:11211',
+    # },
 }
 
 CACHE_LABEL = os.environ.get('TEST_CACHE_BACKEND', 'python-memcached')
