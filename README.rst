@@ -68,19 +68,6 @@ the memcache-status template anywhere you like.
     {% include "memcache_status/memcache_status.html" %}
 
 
-
-Screenshots
-===========
-
-.. image:: https://user-images.githubusercontent.com/1896/54476030-f0dd3080-47f8-11e9-8399-b11f3bf15ebc.png
-   :target: https://user-images.githubusercontent.com/1896/54476030-f0dd3080-47f8-11e9-8399-b11f3bf15ebc.png
-   :align: left
-   :height: 200px
-
-.. image:: https://user-images.githubusercontent.com/1896/54476031-f470b780-47f8-11e9-842f-95d880563a53.png
-   :target: https://user-images.githubusercontent.com/1896/54476031-f470b780-47f8-11e9-842f-95d880563a53.png
-   :height: 300px
-
 Local Development
 =================
 
@@ -106,12 +93,14 @@ To test a specific cache backend define it in the env variable::
 
 
 .. note:: If you're testing pylibmc on OS X and you get an error like
-    *'libmemcached/memcached.h' file not found*, install pylibmc manually in
-    the pipenv shell, then run `pipenv install --dev` again.
+    ``'libmemcached/memcached.h' file not found``, install pylibmc manually,
+    then run the installation again::
 
     $ brew install libmemcached
     $ pipenv run pip install pylibmc --install-option="--with-libmemcached=/usr/local/Cellar/libmemcached/1.0.18_2/"
     $ pipenv install --dev
+
+----
 
 Changelog
 =========
@@ -150,3 +139,17 @@ Changelog
 
 - Initial Release.
 - This version is compatible up to Django v1.2.
+
+----
+
+Screenshots
+===========
+
+.. image:: https://user-images.githubusercontent.com/1896/54476030-f0dd3080-47f8-11e9-8399-b11f3bf15ebc.png
+   :target: https://user-images.githubusercontent.com/1896/54476030-f0dd3080-47f8-11e9-8399-b11f3bf15ebc.png
+   :align: left
+   :height: 200px
+
+.. image:: https://user-images.githubusercontent.com/1896/54476031-f470b780-47f8-11e9-842f-95d880563a53.png
+   :target: https://user-images.githubusercontent.com/1896/54476031-f470b780-47f8-11e9-842f-95d880563a53.png
+   :height: 300px
