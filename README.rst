@@ -23,6 +23,7 @@ Tested Memcached Bindings (but others may provide cache stats too):
 
 - `python-memcached`_ >=1.57
 
+.. _memcached: http://www.danga.com/memcached/
 .. _python-memcached: https://pypi.org/project/python-memcached/
 
 Installation
@@ -36,15 +37,13 @@ stats.
 Screenshots
 ===========
 
-.. image:: https://github.com/downloads/bartTC/django-memcache-status/memcache_status_1.png
+.. image:: https://user-images.githubusercontent.com/1896/54476030-f0dd3080-47f8-11e9-8399-b11f3bf15ebc.png
 
 Overview in your Admin index view. Allows multiple memcached instances.
 
-.. image:: https://github.com/downloads/bartTC/django-memcache-status/memcache_status_2.png
+.. image:: https://user-images.githubusercontent.com/1896/54476031-f470b780-47f8-11e9-842f-95d880563a53.png
 
 Details if you click on a instance
-
-.. _memcached: http://www.danga.com/memcached/
 
 Local Development
 =================
