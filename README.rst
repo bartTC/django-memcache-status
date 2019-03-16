@@ -46,23 +46,19 @@ First add ``memcache_status`` to your ``INSTALLED_APPS`` list.
 
 Then you have two options:
 
-The quickest way is to replace your Django Admin index page with the one
-provided by django-memcache-status. This will show the memcache stats in the
-top left column. This was the regular behavior of django-memcache-status prior
-to version 2.0.
+1) The quickest way is to replace your Django Admin index page with the one
+   provided by django-memcache-status. This will show the memcache stats in the
+   top left column. This was the regular behavior of django-memcache-status
+   prior to version 2.0.
 
-Place this in any ``admin.py`` file of your project.
-
-::
+   Place this in any ``admin.py`` file of your project::
 
     from django.contrib import admin
     admin.site.index_template = 'memcache_status/admin_index.html'
 
 
-If you need to manually place the stats, simply add the CSS file and include
-the memcache-status template anywhere you like.
-
-::
+2) If you need to manually place the stats, simply add the CSS file and include
+   the memcache-status template anywhere you like::
 
     <link rel="stylesheet" href="{% static "memcache_status.css" %}"/>
     {% include "memcache_status/memcache_status.html" %}
@@ -107,7 +103,7 @@ Changelog
 
 **v2.0 (2019-03-16):**
 
-- Compatibility and tests for Django 1.11 ⇥ 2.1 and Python 2.7 ⇥ 3.7.
+- Compatibility and tests for Django 1.11 → 2.1 and Python 2.7 → 3.7.
 - Full code cleanup and update to latest standards.
 - Tested against a variety of memcache bindings.
 - Pipenv support for local development and testing.
