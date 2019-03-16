@@ -4,10 +4,10 @@
 .. image:: https://travis-ci.org/bartTC/django-memcache-status.svg?branch=master
     :target: https://travis-ci.org/bartTC/django-memcache-status
 
-.. image:: https://api.codacy.com/project/badge/Coverage/bb93482e6a6348058b993a42951a9f19
+.. image:: https://api.codacy.com/project/badge/Coverage/1d7d0306c4d14fb9817017d7d23237fe
     :target: https://www.codacy.com/app/bartTC/django-memcache-status
 
-.. image:: https://api.codacy.com/project/badge/Grade/bb93482e6a6348058b993a42951a9f19
+.. image:: https://api.codacy.com/project/badge/Grade/1d7d0306c4d14fb9817017d7d23237fe
     :target: https://www.codacy.com/app/bartTC/django-memcache-status
 
 -----
@@ -19,12 +19,18 @@ django-memcache-status
 This app displays the current load and some statistics for your memcached_
 instances in the index view of your Django admin section.
 
-Tested Memcached Bindings (but others may provide cache stats too):
+Currently these memcached bindings are tested:
 
-- `python-memcached`_ >=1.57
+- `python-memcached`_ (Version >=1.57) with vanilla Django: Works fine
+- pylibmc with `django-pylibmc`_: Works fine
+- pymemcache with `django-pymemcache`_: Does not provide stats
+
+Other bindings may provide statistics too.
 
 .. _memcached: http://www.danga.com/memcached/
 .. _python-memcached: https://pypi.org/project/python-memcached/
+.. _django-pylibmc: https://pypi.org/project/django-pylibmc/
+.. _django-pymemcache: https://pypi.org/project/django-pymemcache/
 
 Installation
 ============
@@ -64,14 +70,20 @@ admin::
     $ pipenv run django-admin.py createsuperuser
     $ pipenv run django-admin.py runserver
 
+To test a specific cache backend define it in the env variable::
+
+    $ TEST_CACHE_BACKEND=django-pylibmc pipenv run django-admin.py runserver
+
 Changelog
 =========
 
 **v2.0 (2019-03-16):**
 
 - Compatibility and tests for Django 1.11 ⇥ 2.1 and Python 2.7 ⇥ 3.7.
-- Pipenv support for local development.
-- General code cleanup.
+- Full code cleanup and update to latest standards.
+- Visual and CSS overhaul.
+- Multiple cache backends tested.
+- Pipenv support for local development and testing.
 
 **v1.3 (2016-10-13):**
 

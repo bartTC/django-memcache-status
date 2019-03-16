@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "1e1f04169426b6ea7d5b0b7a4d7f7ef34b5b2dcf42c2f625159f5d505ead4ae6"
+            "sha256": "c49cf517d0710f5bb14946f891cadf9cffef964224d6aa9ec4469ad833d77cf2"
         },
         "pipfile-spec": 6,
         "requires": {},
@@ -33,11 +33,47 @@
             "editable": true,
             "path": "."
         },
+        "django-pylibmc": {
+            "hashes": [
+                "sha256:02b591933a029eb552388cced713028f3c6cbb021639fc8de388bd1ca87981d4",
+                "sha256:9cffdee703aaf9ebc029d9dbdee8abdd0723564b95e4b2ac59e4a668b8e58f93"
+            ],
+            "index": "pypi",
+            "version": "==0.6.1"
+        },
+        "django-pymemcache": {
+            "hashes": [
+                "sha256:9b520fb7ba7b0e3ddb418e91b4a3303e27beb92d1f3cdc9d0cc1e1285c52a59c",
+                "sha256:b8a41bee53809ac3df89c1dfc9eb9bc390b807367854912feac04691d428529d"
+            ],
+            "index": "pypi",
+            "version": "==0.2.0"
+        },
+        "pylibmc": {
+            "hashes": [
+                "sha256:4fd0badca436accfe0c76fb28ee6323afc7626fa1e85f899d69242a9d9f3a729",
+                "sha256:5ef97be4ca5527d5b87dbe77cfdd94b427028caf4136feff7da23c40e1ded6d8",
+                "sha256:69bfcc6b4d39a7e04fa8670943fcd8ea13e07c2ef27d08542413b8a509aa585f",
+                "sha256:d29d266dcbd3cd67ba1ca449d7412e49c548b2837b9a4a361fa57c9fdd469082",
+                "sha256:fa0a6352bb4a2e70965e5d4d5869b3e9c37e8959c51bdcf2ec743ee6b79b7dd9"
+            ],
+            "index": "pypi",
+            "version": "==1.6.0"
+        },
+        "pymemcache": {
+            "hashes": [
+                "sha256:24634565e4cdf9c625a3c89ac69650812cc3986f4159a56814c932f027605a9c",
+                "sha256:e3497ceda0ba88757d8f7e0f57c9bf3228d7873f9b5bf2c08983eed4362901b6"
+            ],
+            "index": "pypi",
+            "version": "==2.1.1"
+        },
         "python-memcached": {
             "hashes": [
                 "sha256:4dac64916871bd3550263323fc2ce18e1e439080a2d5670c594cf3118d99b594",
                 "sha256:a2e28637be13ee0bf1a8b6843e7490f9456fd3f2a4cb60471733c7b5d5557e4f"
             ],
+            "index": "pypi",
             "version": "==1.59"
         },
         "pytz": {

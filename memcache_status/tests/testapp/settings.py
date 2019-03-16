@@ -18,12 +18,33 @@ DATABASES = {
     }
 }
 
-CACHES = {
-    'default': {
+# Cache backends to test based on ENV variabe below.
+CACHE_BACKENDS_TO_TEST = {
+    'python-memcached': {
         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
         'LOCATION': '127.0.0.1:11211',
     },
+
+    'django-pylibmc': {
+        'BACKEND': 'django.core.cache.backends.memcached.PyLibMCCache',
+        'LOCATION': '127.0.0.1:11211',
+    },
+
+    'django-pymemcache': {
+        'BACKEND': 'djpymemcache.backend.PyMemcacheCache',
+        'LOCATION': '127.0.0.1:11211',
+    },
 }
+
+CACHE_LABEL = os.environ.get('TEST_CACHE_BACKEND', 'python-memcached')
+if CACHE_LABEL not in CACHE_BACKENDS_TO_TEST:
+    sys.stderr.write('\nCache backend % is not defined in the settings\n' % CACHE_LABEL)
+    exit(1)
+
+
+sys.stdout.write('Testing cache backend: %s\n' % CACHE_LABEL)
+CACHES = {'default': CACHE_BACKENDS_TO_TEST[CACHE_LABEL]}
+
 
 STATIC_ROOT = os.path.join(TESTAPP_DIR, '.static')
 MEDIA_ROOT = os.path.join(TESTAPP_DIR, '.uploads')

@@ -13,6 +13,11 @@ black = "*"
 [packages]
 django-memcache-status = {editable = true,path = "."}
 django-debug-toolbar = "*"
+python-memcached = "*"
+pylibmc = "*"
+django-pylibmc = "*"
+pymemcache = "*"
+django-pymemcache = "*"
 
 [pipenv]
 allow_prereleases = true
