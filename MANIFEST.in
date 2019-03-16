@@ -1,4 +1,7 @@
+include *.in
+include *.lock
+include *.py
 include LICENSE
-include README.rst
-include MANIFEST.in
-recursive-include memcache_status/templates *
+include Pipfile
+include tox.ini
+recursive-include memcache_status *.html
