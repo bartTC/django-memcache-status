@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 
 import logging
+from datetime import datetime
 
 import six
 from django import template
@@ -86,30 +87,28 @@ class PrettyValue(object):
         return self.fract_timestamp(int(value))
 
     def format_time_value(self, value):
-        from datetime import datetime
-
         return datetime.fromtimestamp(int(value)).strftime('%x %X')
 
     def fract_timestamp(self, s):
         years, s = divmod(s, 31556952)
-        min, s = divmod(s, 60)
-        h, min = divmod(min, 60)
+        min_, s = divmod(s, 60)
+        h, min_ = divmod(min_, 60)
         d, h = divmod(h, 24)
-        return '%sy, %sd, %sh, %sm, %ss' % (years, d, h, min, s)
+        return '%sy, %sd, %sh, %sm, %ss' % (years, d, h, min_, s)
 
-    def human_bytes(self, bytes):
-        bytes = float(bytes)
-        if bytes >= 1073741824:
-            gigabytes = bytes / 1073741824
-            size = '%.2fGB' % gigabytes
-        elif bytes >= 1048576:
-            megabytes = bytes / 1048576
-            size = '%.2fMB' % megabytes
-        elif bytes >= 1024:
-            kilobytes = bytes / 1024
-            size = '%.2fKB' % kilobytes
+    def human_bytes(self, bytes_):
+        bytes_ = float(bytes_)
+        if bytes_ >= 1073741824:
+            gigabytes_ = bytes_ / 1073741824
+            size = '%.2fGB' % gigabytes_
+        elif bytes_ >= 1048576:
+            megabytes_ = bytes_ / 1048576
+            size = '%.2fMB' % megabytes_
+        elif bytes_ >= 1024:
+            kilobytes_ = bytes_ / 1024
+            size = '%.2fKB' % kilobytes_
         else:
-            size = '%.2fB' % bytes
+            size = '%.2fB' % bytes_
         return size
 
 
