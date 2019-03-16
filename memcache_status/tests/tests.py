@@ -18,7 +18,7 @@ class MemcacheStatusSanityTests(TestCase):
 
     def test_cache_stats_included(self):
         response = self.client.get('/admin/')
-        self.assertIn('cache_stats', str(response.content))
+        self.assertIn('cache-stats', str(response.content))
 
 
 class MemcacheStatusPermissionsTests(TestCase):
@@ -30,4 +30,4 @@ class MemcacheStatusPermissionsTests(TestCase):
         )
         self.client.login(username=self.user.username, password='password')
         response = self.client.get('/admin/')
-        self.assertNotIn('cache_stats', str(response.content))
+        self.assertNotIn('cache-stats', str(response.content))
