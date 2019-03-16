@@ -19,6 +19,12 @@ django-memcache-status
 This app displays the current load and some statistics for your memcached_
 instances in the index view of your Django admin section.
 
+Tested Memcached Bindings (but others may provide cache stats too):
+
+- `python-memcached`_ >=1.57
+
+.. _python-memcached: https://pypi.org/project/python-memcached/
+
 Installation
 ============
 
@@ -52,6 +58,12 @@ You can test against a matrix of Python and Django versions using tox::
 
     $ tox
 
+You can run a local runserver with the test application to see the
+admin::
+
+    $ pipenv run django-admin.py migrate
+    $ pipenv run django-admin.py createsuperuser
+    $ pipenv run django-admin.py runserver
 
 Changelog
 =========

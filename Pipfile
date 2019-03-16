@@ -9,10 +9,10 @@ codacy-coverage = "*"
 ipdb = "*"
 isort = "*"
 black = "*"
-django-debug-toolbar = "*"
 
 [packages]
 django-memcache-status = {editable = true,path = "."}
+django-debug-toolbar = "*"
 
 [pipenv]
 allow_prereleases = true

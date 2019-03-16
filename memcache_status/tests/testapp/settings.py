@@ -18,6 +18,13 @@ DATABASES = {
     }
 }
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': '127.0.0.1:11211',
+    },
+}
+
 STATIC_ROOT = os.path.join(TESTAPP_DIR, '.static')
 MEDIA_ROOT = os.path.join(TESTAPP_DIR, '.uploads')
 
@@ -28,11 +35,13 @@ ROOT_URLCONF = 'memcache_status.tests.testapp.urls'
 
 INSTALLED_APPS = [
     'memcache_status',
+    'memcache_status.tests.testapp',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'django.contrib.staticfiles',
 ]
 
 MIDDLEWARE = [
