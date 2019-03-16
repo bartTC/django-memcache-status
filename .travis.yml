@@ -1,37 +1,20 @@
 language: python
 
-services:
-  - memcached
-
-python:
-  - 2.7
-  - 3.4
-  - 3.5
-  - 3.6
-
-env:
-  - DJANGO=1.8.*
-  - DJANGO=1.9.*
-  - DJANGO=1.10.*
-  - DJANGO=1.11.*
-  - DJANGO=2.0a1
-  - TEST_WITH_DEBUGTOOLBAR=on DJANGO=1.8.*
-  - TEST_WITH_DEBUGTOOLBAR=on DJANGO=1.9.*
-  - TEST_WITH_DEBUGTOOLBAR=on DJANGO=1.10.*
-  - TEST_WITH_DEBUGTOOLBAR=on DJANGO=1.11.*
-  - TEST_WITH_DEBUGTOOLBAR=on DJANGO=2.0a1
-
+# https://github.com/travis-ci/travis-ci/issues/9815#issuecomment-411073985
 matrix:
-  exclude:
+  include:
     - python: 2.7
-      env: DJANGO=2.0a1
-    - python: 2.7
-      env: TEST_WITH_DEBUGTOOLBAR=on DJANGO=2.0a1
+    - python: 3.4
+    - python: 3.5
+    - python: 3.6
+    - python: 3.7
+      dist: xenial
+      sudo: true
 
-install:
-  - pip install django-debug-toolbar
-  - pip install django==$DJANGO
-  - pip install -e .
+install: pip install tox-travis coverage codacy-coverage
 
-script:
-  - python runtests.py
+script: tox
+
+after_success:
+  - coverage xml
+  - python-codacy-coverage -r coverage.xml

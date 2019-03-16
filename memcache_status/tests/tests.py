@@ -1,12 +1,15 @@
 from __future__ import unicode_literals
 
-from django.contrib.auth.models import User
 from django.test import TestCase
 
 
 class MemcacheStatusSanityTests(TestCase):
     def setUp(self):
-        self.user = User.objects.create_superuser('test', 'test@test.com', 'password')
+        from django.contrib.auth.models import User
+
+        self.user = User.objects.create_superuser(
+            'test', 'test@test.com', 'password'
+        )
         self.client.login(username=self.user.username, password='password')
 
     def test_admin_accessible(self):
@@ -20,7 +23,11 @@ class MemcacheStatusSanityTests(TestCase):
 
 class MemcacheStatusPermissionsTests(TestCase):
     def test_non_superuser_cant_see_stats(self):
-        self.user = User.objects.create_user('test', 'test@test.com', 'password')
+        from django.contrib.auth.models import User
+
+        self.user = User.objects.create_user(
+            'test', 'test@test.com', 'password'
+        )
         self.client.login(username=self.user.username, password='password')
         response = self.client.get('/admin/')
         self.assertNotIn('cache_stats', str(response.content))

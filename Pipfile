@@ -1,0 +1,22 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+coverage = "*"
+codacy-coverage = "*"
+ipdb = "*"
+isort = "*"
+black = "*"
+django-debug-toolbar = "*"
+
+[packages]
+django-memcache-status = {editable = true,path = "."}
+
+[pipenv]
+allow_prereleases = true
+
+[scripts]
+test = "./runtests.py"
+cleanup = "sh -c \"isort -rc memcache_status && black --skip-string-normalization --line-length=80 --exclude='/(migrations)/' memcache_status\""

@@ -1,8 +1,8 @@
 from __future__ import unicode_literals
 
 import logging
-import six
 
+import six
 from django import template
 from django.conf import settings
 
@@ -18,7 +18,11 @@ if caches.__module__.startswith('debug_toolbar'):
         from debug_toolbar.panels.cache import get_cache as caches
 
 
-get_cache = lambda cache_name: caches(cache_name) if hasattr(caches, '__call__') else caches[cache_name]
+get_cache = (
+    lambda cache_name: caches(cache_name)
+    if hasattr(caches, '__call__')
+    else caches[cache_name]
+)
 logger = logging.getLogger(__name__)
 register = template.Library()
 
@@ -35,15 +39,22 @@ def get_cache_stats(context):
             cache_backend = get_cache(cache_backend_nm)
             this_backend_stats = cache_backend._cache.get_stats()
             if not this_backend_stats:
-                logger.warning('The memcached backend "%s" does not support or '
-                    'provide stats. (Or its no memcached, or its not running.)', cache_backend_nm)
+                logger.warning(
+                    'The memcached backend "%s" does not support or '
+                    'provide stats. (Or its no memcached, or its not running.)',
+                    cache_backend_nm,
+                )
             # returns list of (name, stats) tuples
             for server_name, server_stats in this_backend_stats:
-                cache_stats.append(("%s: %s" % (
-                    cache_backend_nm, server_name), server_stats))
-        except AttributeError: # this backend probably doesn't support that
-            logger.warning('The memcached backend "%s" does not support or '
-                'provide stats.  (Or its no memcached, or its not running.)', cache_backend_nm)
+                cache_stats.append(
+                    ("%s: %s" % (cache_backend_nm, server_name), server_stats)
+                )
+        except AttributeError:  # this backend probably doesn't support that
+            logger.warning(
+                'The memcached backend "%s" does not support or '
+                'provide stats.  (Or its no memcached, or its not running.)',
+                cache_backend_nm,
+            )
     context['cache_stats'] = cache_stats
     return ''
 
@@ -76,6 +87,7 @@ class PrettyValue(object):
 
     def format_time_value(self, value):
         from datetime import datetime
+
         return datetime.fromtimestamp(int(value)).strftime('%x %X')
 
     def fract_timestamp(self, s):
