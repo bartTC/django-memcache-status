@@ -1,0 +1,87 @@
+{% load memcache_status_tags %}
+{% load i18n %}
+
+{% memcache_status as memcache_status %}
+
+{% if memcache_status %}
+  <h3>Memcache Status:</h3>
+  <div class="module">
+
+    {% for server in memcache_status %}
+    <div class="cache-stats">
+      <table>
+
+        <caption>
+          <a href="#" class="section"
+             data-for-panel="cache-panel-{{ forloop.counter }}">
+            <strong>{{ server.name }}</strong>
+            &mdash;
+            {{ server.address }}
+            &mdash;
+            {% widthratio server.stats.bytes server.stats.limit_maxbytes 100 %}%
+            load</a>
+        </caption>
+
+        <thead>
+        <tr>
+          <td colspan="2">
+            <div class="cache-graph">
+              <div class="cache-graph-value"
+                   style="width: {% widthratio server.1.bytes server.1.limit_maxbytes 100 %}%"></div>
+            </div>
+          </td>
+        </tr>
+        </thead>
+
+        <tbody id="cache-panel-{{ forloop.counter }}">
+        <tr>
+          <th>{% trans "Miss Ratio" %}</th>
+          <td>
+            {% widthratio server.stats.get_misses server.stats.cmd_get 100 %}%
+            <div class="cache-graph inline">
+              <div class="cache-graph-value"
+                   style="width: {% widthratio server.stats.get_misses server.stats.cmd_get 100 %}%"></div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <th>{% trans "Avg GET by item" %}</th>
+          <td>{% widthratio server.stats.cmd_get server.stats.total_items 1 %}</td>
+        </tr>
+        <tr>
+          <th>{% trans "Avg GET by seconds/minutes" %}</th>
+          <td>{% widthratio server.stats.cmd_get server.stats.uptime 1 %}/{% widthratio server.stats.cmd_get server.stats.uptime 60 %}</td>
+        </tr>
+        {# ----- Detailed Statistics ----- #}
+        <tr>
+          <th class="cache-title"
+              colspan="2">{% trans "Detailed Statistics:" %}</th>
+        </tr>
+        {% for k,v in server.stats.items %}
+          <tr>
+            <th>{{ k|memcache_status_pretty_name }}</th>
+            <td>{{ v|memcache_status_pretty_value:k }}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+
+      </table>
+    </div>
+    {% endfor %}
+
+  </div>
+  <script>
+    const statsPanel = document.querySelectorAll('.cache-stats a.section')
+    statsPanel.forEach((caption) => {
+      const panelFlyout = caption.dataset.forPanel;
+      caption.onclick = function() {
+        const tbodyStyle = document.getElementById(panelFlyout).style;
+        tbodyStyle.display = tbodyStyle.display === 'table-row-group'
+            ? 'none' : 'table-row-group';
+      };
+    });
+  </script>
+{% else %}
+  <!-- No server provides memcache stats or user does not have permission to view. -->
+{% endif %}
+

@@ -3,61 +3,25 @@ from __future__ import unicode_literals
 import logging
 from datetime import datetime
 
-import six
 from django import template
-from django.conf import settings
+from django.apps import apps
 
-try:
-    from django.core.cache import caches
-except ImportError:
-    from django.core.cache import get_cache as caches
+from memcache_status.utils import get_cache_stats
 
-if caches.__module__.startswith('debug_toolbar'):
-    try:
-        from debug_toolbar.panels.cache import base_get_cache as caches
-    except ImportError:
-        from debug_toolbar.panels.cache import get_cache as caches
-
-
-get_cache = (
-    lambda cache_name: caches(cache_name)
-    if hasattr(caches, '__call__')
-    else caches[cache_name]
-)
 logger = logging.getLogger(__name__)
 register = template.Library()
 
 
 @register.simple_tag(takes_context=True)
-def get_cache_stats(context):
-    """
-    Reads the cache stats out of the memcached cache backend. Returns `None`
-    if no cache stats supported.
-    """
-    cache_stats = []
-    for cache_backend_nm, cache_backend_attrs in six.iteritems(settings.CACHES):
-        try:
-            cache_backend = get_cache(cache_backend_nm)
-            this_backend_stats = cache_backend._cache.get_stats()
-            if not this_backend_stats:
-                logger.warning(
-                    'The memcached backend "%s" does not support or '
-                    'provide stats. (Or its no memcached, or its not running.)',
-                    cache_backend_nm,
-                )
-            # returns list of (name, stats) tuples
-            for server_name, server_stats in this_backend_stats:
-                cache_stats.append(
-                    ("%s: %s" % (cache_backend_nm, server_name), server_stats)
-                )
-        except AttributeError:  # this backend probably doesn't support that
-            logger.warning(
-                'The memcached backend "%s" does not support or '
-                'provide stats.  (Or its no memcached, or its not running.)',
-                cache_backend_nm,
-            )
-    context['cache_stats'] = cache_stats
-    return ''
+def memcache_status(context):
+    request = context.request
+    config = apps.get_app_config('memcache_status')
+
+    if not config.show_cache_stats(request):
+        logger.debug('Cache stats not shown because user has no permission.')
+        return []
+
+    return get_cache_stats()
 
 
 class PrettyValue(object):
@@ -113,10 +77,10 @@ class PrettyValue(object):
 
 
 @register.filter
-def prettyname(name):
+def memcache_status_pretty_name(name):
     return ' '.join([word.capitalize() for word in name.split('_')])
 
 
 @register.filter
-def prettyvalue(value, key):
+def  memcache_status_pretty_value(value, key):
     return PrettyValue().format(key, value)

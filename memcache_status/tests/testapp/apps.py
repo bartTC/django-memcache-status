@@ -22,6 +22,9 @@ class MemcacheStatusTestAppConfig(AppConfig):
         """
         Add some arbitraty data to the cache to have _some_ statistics.
         """
+        from django.contrib import admin
+        admin.site.index_template = 'memcache_status/admin_index.html'
+
         from django.core.cache import cache
 
         # Set 1000 items. Generate 2000 GET Hits. Generate 500 DELETE hits.

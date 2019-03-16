@@ -1,0 +1,20 @@
+{% extends "admin/index.html" %}
+
+{% comment %}
+
+  Overwrites the regular Django Admin Index page and adds
+  memcache stats to the top of the left application list.
+
+{% endcomment %}
+
+{% load staticfiles %}
+
+{% block extrahead %}
+  <link rel="stylesheet" href="{% static "memcache_status.css" %}"/>
+  {{ block.super }}
+{% endblock %}
+
+{% block content %}
+  {% include "memcache_status/memcache_status.html" %}
+  {{ block.super }}
+{% endblock %}

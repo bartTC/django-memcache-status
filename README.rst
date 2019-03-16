@@ -35,21 +35,51 @@ Other bindings may provide statistics too.
 Installation
 ============
 
-Put ``memcache_status`` in your ``INSTALLED_APPS``.
+First add ``memcache_status`` to your ``INSTALLED_APPS`` list.
 
-That's all. Only admin-users with ``is_superuser`` permission can see these
-stats.
+::
+
+    INSTALLED_APPS = [
+        # ...
+        'memcache_status',
+    ]
+
+Then you have two options:
+
+The quickest way is to replace your Django Admin index page with the one
+provided by django-memcache-status. This will show the memcache stats in the
+top left column. This was the regular behavior of django-memcache-status prior
+to version 2.0.
+
+Place this in any ``admin.py`` file of your project.
+
+::
+
+    from django.contrib import admin
+    admin.site.index_template = 'memcache_status/admin_index.html'
+
+
+If you need to manually place the stats, simply add the CSS file and include
+the memcache-status template anywhere you like.
+
+::
+
+    <link rel="stylesheet" href="{% static "memcache_status.css" %}"/>
+    {% include "memcache_status/memcache_status.html" %}
+
+
 
 Screenshots
 ===========
 
 .. image:: https://user-images.githubusercontent.com/1896/54476030-f0dd3080-47f8-11e9-8399-b11f3bf15ebc.png
-
-Overview in your Admin index view. Allows multiple memcached instances.
+   :target: https://user-images.githubusercontent.com/1896/54476030-f0dd3080-47f8-11e9-8399-b11f3bf15ebc.png
+   :align: left
+   :height: 200px
 
 .. image:: https://user-images.githubusercontent.com/1896/54476031-f470b780-47f8-11e9-842f-95d880563a53.png
-
-Details if you click on a instance
+   :target: https://user-images.githubusercontent.com/1896/54476031-f470b780-47f8-11e9-842f-95d880563a53.png
+   :height: 300px
 
 Local Development
 =================
@@ -74,6 +104,15 @@ To test a specific cache backend define it in the env variable::
 
     $ TEST_CACHE_BACKEND=django-pylibmc pipenv run django-admin.py runserver
 
+
+.. note:: If you're testing pylibmc on OS X and you get an error like
+    *'libmemcached/memcached.h' file not found*, install pylibmc manually in
+    the pipenv shell, then run `pipenv install --dev` again.
+
+    $ brew install libmemcached
+    $ pipenv run pip install pylibmc --install-option="--with-libmemcached=/usr/local/Cellar/libmemcached/1.0.18_2/"
+    $ pipenv install --dev
+
 Changelog
 =========
 
@@ -81,9 +120,14 @@ Changelog
 
 - Compatibility and tests for Django 1.11 ⇥ 2.1 and Python 2.7 ⇥ 3.7.
 - Full code cleanup and update to latest standards.
-- Visual and CSS overhaul.
-- Multiple cache backends tested.
+- Tested against a variety of memcache bindings.
 - Pipenv support for local development and testing.
+- *[Backwards Incompatible]* memcache-status no longer automatically overwrites
+  the admin index template to add the stats. Instead you have the option to
+  either  manually display the stats anywhere you like using a template include,
+  or use the contributed memcache-status admin index page that overwrites the
+  vanilla Django template and adds statistics to the top left admin index page.
+  This was the regular behavior of django-memcache-status prior to version 2.0.
 
 **v1.3 (2016-10-13):**
 
