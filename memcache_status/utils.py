@@ -14,7 +14,10 @@ if caches.__module__.startswith('debug_toolbar'):
     try:
         from debug_toolbar.panels.cache import base_get_cache as caches
     except ImportError:
-        from debug_toolbar.panels.cache import get_cache as caches
+        try:
+            from debug_toolbar.panels.cache import get_cache as caches
+        except ImportError:
+            pass
 
 
 get_cache = (
