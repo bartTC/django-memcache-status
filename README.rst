@@ -107,8 +107,8 @@ Changelog
 
 **v2.1 (2019-03-21):**
 
-- Removed some deprecated django-debug-toolbar and pre-Django 1.11 related
-  overrides.
+- Removed some deprecated django-debug-toolbar and pre-Django 1.11
+  related workarounds.
 - More comprehensive unittests across all backends and it's relation
   with django-debug-toolbar.
 
