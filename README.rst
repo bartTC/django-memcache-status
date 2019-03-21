@@ -24,7 +24,7 @@ Currently these memcached bindings are tested:
 ========================================================= ================================
 Backend                                                   Support
 ========================================================= ================================
-`python-memcached`_ with vanilla Django                   ✅ Works fine with >= v1.75
+`python-memcached`_ with vanilla Django                   ✅ Works fine with >= v1.57
 pylibmc with `django-pylibmc`_                            ✅ Works fine
 pymemcache with `django-pymemcache`_                      ❎ Does not provide stats
 ========================================================= ================================
@@ -109,7 +109,7 @@ Changelog
 
 - Removed some deprecated django-debug-toolbar and pre-Django 1.11 related
   overrides.
-- More comprehensive unittests across all backends and it's relation 
+- More comprehensive unittests across all backends and it's relation
   with django-debug-toolbar.
 
 **v2.0 (2019-03-16):**
