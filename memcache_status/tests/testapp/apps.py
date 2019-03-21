@@ -27,8 +27,8 @@ class MemcacheStatusTestAppConfig(AppConfig):
 
         from django.core.cache import cache
 
-        # Set 1000 items. Generate 2000 GET Hits. Generate 500 DELETE hits.
-        for i in range(1, 1000):
+        # Set 100 items. Generate 200 GET Hits. Generate 50 DELETE hits.
+        for i in range(1, 100):
             key = 'TEST_VALUE_{0}'.format(i)
             cache.set(key, lorem)
             cache.get(key)
@@ -37,7 +37,7 @@ class MemcacheStatusTestAppConfig(AppConfig):
                 cache.delete(key)
 
         # Generate 100 GET misses and 50 DELETE misses.
-        for i in range(1000, 1100):
+        for i in range(100, 200):
             key = 'TEST_VALUE_{0}'.format(i)
             cache.get(key)
             if i % 2 == 0:

@@ -21,9 +21,13 @@ instances in the index view of your Django admin section.
 
 Currently these memcached bindings are tested:
 
-- `python-memcached`_ (Version >=1.57) with vanilla Django: Works fine
-- pylibmc with `django-pylibmc`_: Works fine
-- pymemcache with `django-pymemcache`_: Does not provide stats
+========================================================= ================================
+Backend                                                   Support
+========================================================= ================================
+`python-memcached`_ with vanilla Django                   ✅ Works fine with >= v1.75
+pylibmc with `django-pylibmc`_                            ✅ Works fine
+pymemcache with `django-pymemcache`_                      ❎ Does not provide stats
+========================================================= ================================
 
 Other bindings may provide statistics too.
 
@@ -100,6 +104,13 @@ To test a specific cache backend define it in the env variable::
 
 Changelog
 =========
+
+**v2.1 (2019-03-21):**
+
+- Removed some deprecated django-debug-toolbar and pre-Django 1.11 related
+  overrides.
+- More comprehensive unittests across all backends and it's relation 
+  with django-debug-toolbar.
 
 **v2.0 (2019-03-16):**
 

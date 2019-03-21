@@ -16,10 +16,10 @@
     "default": {
         "django": {
             "hashes": [
-                "sha256:58819ca72a13b963c16383687421261657abe5754aad9ad66166a921dd17559f",
-                "sha256:62644444551e8e6fd36600e741a4d24dd2b4b58acf7bae8847a8da952468d771"
+                "sha256:6cdb98d464e5ffc9cbe3d3ca5ca74d61e69ce1784d5e15b85ceb19dee939f650",
+                "sha256:b74420065c5a3f7bcb07c0811b1308239c05989e29963ff39f7b5e9c1cacc195"
             ],
-            "version": "==2.2b1"
+            "version": "==2.2rc1"
         },
         "django-debug-toolbar": {
             "hashes": [
@@ -216,10 +216,10 @@
         },
         "ipdb": {
             "hashes": [
-                "sha256:7081c65ed7bfe7737f83fa4213ca8afd9617b42ff6b3f1daf9a3419839a2a00a"
+                "sha256:dce2112557edfe759742ca2d0fee35c59c97b0cc7a05398b791079d78f1519ce"
             ],
             "index": "pypi",
-            "version": "==0.11"
+            "version": "==0.12"
         },
         "ipython": {
             "hashes": [

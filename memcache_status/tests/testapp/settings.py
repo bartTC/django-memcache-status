@@ -23,18 +23,29 @@ CACHE_BACKENDS_TO_TEST = {
     'python-memcached': {
         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
         'LOCATION': '127.0.0.1:11211',
+
+        # Flag only used for the unittests. It indicates whether its expected
+        # that this backend provides stats or not.
+        'TEST_PROVIDES_STATS': True,
     },
 
     'django-pylibmc': {
         'BACKEND': 'django.core.cache.backends.memcached.PyLibMCCache',
         'LOCATION': '127.0.0.1:11211',
+
+        # Flag only used for the unittests. It indicates whether its expected
+        # that this backend provides stats or not.
+        'TEST_PROVIDES_STATS': True,
     },
 
-    # pymemcache does not provide any stats.
-    # 'django-pymemcache': {
-    #     'BACKEND': 'djpymemcache.backend.PyMemcacheCache',
-    #     'LOCATION': '127.0.0.1:11211',
-    # },
+    'django-pymemcache': {
+        'BACKEND': 'djpymemcache.backend.PyMemcacheCache',
+        'LOCATION': '127.0.0.1:11211',
+
+        # Flag only used for the unittests. It indicates whether its expected
+        # that this backend provides stats or not.
+        'TEST_PROVIDES_STATS': False,
+    },
 }
 
 CACHE_LABEL = os.environ.get('TEST_CACHE_BACKEND', 'python-memcached')
@@ -93,4 +104,8 @@ if os.getenv('TEST_WITH_DEBUGTOOLBAR', False) == 'on':
     sys.stdout.write('Testing with django-debug-toolbar support.\n')
     INSTALLED_APPS.insert(0, 'debug_toolbar')
     MIDDLEWARE.append('debug_toolbar.middleware.DebugToolbarMiddleware')
-    INTERNAL_IPS = ['127.0.0.1']
+
+    # Make sure debug toolbar is always visible, even in Unittests.
+    DEBUG_TOOLBAR_CONFIG = {
+        'SHOW_TOOLBAR_CALLBACK': lambda request: True
+    }
