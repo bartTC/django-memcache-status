@@ -21,5 +21,5 @@ if os.getenv('TEST_WITH_DEBUGTOOLBAR', False) == 'on':
         urlpatterns += [path('__debug__/', include(debug_toolbar.urls))]
     else:
         import debug_toolbar
-        from django.conf.urls import include, url
+        from django.conf.urls import include
         urlpatterns += [url(r'^__debug__/', include(debug_toolbar.urls))]
