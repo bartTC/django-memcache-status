@@ -9,6 +9,9 @@ codacy-coverage = "*"
 ipdb = "*"
 isort = "*"
 black = "*"
+pytest = "*"
+pytest-django = "*"
+pytest-cov = "*"
 
 [packages]
 django-memcache-status = {editable = true,path = "."}
@@ -18,7 +21,6 @@ pylibmc = "*"
 django-pylibmc = "*"
 pymemcache = "*"
 django-pymemcache = "*"
-
 
 [pipenv]
 allow_prereleases = true

@@ -74,11 +74,13 @@ Local Development
 Install the package using Pipenv and run the tests::
 
     $ pipenv install --dev
-    $ pipenv run test
+    $ pipenv run pytest
 
 You can test against a matrix of Python and Django versions using tox::
 
     $ tox
+
+Once run you will see a coverage report in `/tmp/coverage_report/django-memcache-status`.
 
 You can run a local runserver with the test application to see the
 admin::
