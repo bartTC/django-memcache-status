@@ -74,7 +74,7 @@ Local Development
 Install the package using Pipenv and run the tests::
 
     $ pipenv install --dev
-    $ pipenv run pytest
+    $ pipenv run test
 
 You can test against a matrix of Python and Django versions using tox::
 
@@ -106,6 +106,11 @@ To test a specific cache backend define it in the env variable::
 
 Changelog
 =========
+
+**(master):**
+
+- Compatibility and tests for Django 2.2 and 3.0, and Python 3.8.
+- Use pytest for testing. 
 
 **v2.1 (2019-03-21):**
 
