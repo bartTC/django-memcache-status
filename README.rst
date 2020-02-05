@@ -107,7 +107,7 @@ To test a specific cache backend define it in the env variable::
 Changelog
 =========
 
-**(master):**
+**v2.2 (2020-02-05):**
 
 - Compatibility and tests for Django 2.2 and 3.0, and Python 3.8.
 - Use pytest for testing. 
