@@ -1,3 +1,1 @@
-from __future__ import unicode_literals
-
-from .tests import *
+from .tests import *  # noqa: F403 Star import

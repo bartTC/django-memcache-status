@@ -3,6 +3,7 @@ include *.lock
 include *.py
 include LICENSE
 include Pipfile
+include pyproject.toml
 include tox.ini
 recursive-include memcache_status *.html
 

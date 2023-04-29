@@ -16,7 +16,7 @@
              data-for-panel="cache-panel-{{ forloop.counter }}">
             <strong>{{ server.name }}</strong>
             &mdash;
-            {{ server.address }}
+            {{ server.address.decode }}
             &mdash;
             {% widthratio server.stats.bytes server.stats.limit_maxbytes 100 %}%
             load</a>

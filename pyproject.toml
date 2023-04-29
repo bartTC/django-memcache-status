@@ -1,0 +1,47 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta:__legacy__"
+
+[tool.black]
+target-version = ['py311']
+include = '\.pyi?$'
+exclude = "migrations"
+
+[tool.ruff]
+target-version = "py38"
+exclude = ["migrations"]
+select = ["ALL"]
+ignore = [
+  "A",        # Variable/Argument/Class attribute ... is shadowing a python builtin
+  "ANN101",   # Missing type annotation for `self` in method
+  "C90" ,     # Method is too complex
+  "D",        # Missing or badly formatted docstrings
+  "DTZ006",   # The use of datetime without `tz` argument is not allowed
+  "E501",     # Line too long (>88)
+  "EM",       # Exception must not use <string format>
+  "ERA001",   # Found commented-out code
+  "FBT",      # Flake Boolean Trap (don't use arg=True in functions)
+  "N8",       # Invalid class/method/function naming
+  "PLR09",    # Too many branches, arguments, statements
+  "PLR2004",  # Magic value used in comparison
+  "PT009",    # Use a regular `assert` instead of unittest-style `assertEqual`
+  "RUF005",   # Consider `(list, *list) instead of concatenation
+  "S101",     # Use of `assert` detected
+  "S308",     # Use of `mark_safe` may expose cross-site scripting vulnerabilities
+  "SLF001",   # Private member accessed"
+  "TID252",   # Relative imports from parent modules are banned (from ..foo import bar)"
+  "TRY003",   # Avoid specifying long messages outside the exception class
+]
+
+[tool.pytest.ini_options]
+python_files = [
+  "tests.py",
+  "test_*.py",
+  "*_tests.py",
+]
+addopts = """
+    --ds=memcache_status.tests.testapp.settings
+    --nomigrations
+    --reuse-db
+"""
+filterwarnings = ["ignore::RuntimeWarning"]

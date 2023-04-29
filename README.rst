@@ -1,15 +1,6 @@
 .. image:: https://img.shields.io/pypi/v/django-memcache-status.svg
     :target: https://pypi.org/project/django-memcache-status/
 
-.. image:: https://travis-ci.org/bartTC/django-memcache-status.svg?branch=master
-    :target: https://travis-ci.org/bartTC/django-memcache-status
-
-.. image:: https://api.codacy.com/project/badge/Coverage/1d7d0306c4d14fb9817017d7d23237fe
-    :target: https://www.codacy.com/app/bartTC/django-memcache-status
-
-.. image:: https://api.codacy.com/project/badge/Grade/1d7d0306c4d14fb9817017d7d23237fe
-    :target: https://www.codacy.com/app/bartTC/django-memcache-status
-
 -----
 
 ======================
@@ -24,17 +15,26 @@ Currently these memcached bindings are tested:
 ========================================================= ================================
 Backend                                                   Support
 ========================================================= ================================
-`python-memcached`_ with vanilla Django                   ✅ Works fine with >= v1.57
-pylibmc with `django-pylibmc`_                            ✅ Works fine
-pymemcache with `django-pymemcache`_                      ❎ Does not provide stats
+``django.core.cache.backends.memcached.PyLibMCCache``      ✅ Works fine
+``django.core.cache.backends.memcached.PyMemcacheCache``   ❎ Does not provide stats
 ========================================================= ================================
 
 Other bindings may provide statistics too.
 
 .. _memcached: http://www.danga.com/memcached/
-.. _python-memcached: https://pypi.org/project/python-memcached/
-.. _django-pylibmc: https://pypi.org/project/django-pylibmc/
-.. _django-pymemcache: https://pypi.org/project/django-pymemcache/
+
+Compatibility Matrix:
+=====================
+
+========= === === ==== ====
+Py/Dj     3.8 3.9 3.10 3.11
+========= === === ==== ====
+3.2 (LTS)  ✓   ✓   ✓    ✓
+4.0        ✓   ✓   ✓    ✓
+4.1        ✓   ✓   ✓    ✓
+4.2 (LTS)  ✓   ✓   ✓    ✓
+========= === === ==== ====
+
 
 Installation
 ============
@@ -107,10 +107,15 @@ To test a specific cache backend define it in the env variable::
 Changelog
 =========
 
+**v2.3 (2023-04-29):**
+
+- Compatibility and tests for Django 3.2 to 4.2, and Python 3.11.
+- Dropped support for Django 2.2.
+
 **v2.2 (2020-02-05):**
 
 - Compatibility and tests for Django 2.2 and 3.0, and Python 3.8.
-- Use pytest for testing. 
+- Use pytest for testing.
 
 **v2.1 (2019-03-21):**
 

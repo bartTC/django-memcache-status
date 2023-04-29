@@ -4,14 +4,13 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
-coverage = "*"
-codacy-coverage = "*"
-ipdb = "*"
-isort = "*"
 black = "*"
+ruff = "*"
 pytest = "*"
 pytest-django = "*"
-pytest-cov = "*"
+wheel = "*"
+setuptools = "*"
+ipdb = "*"
 
 [packages]
 django-memcache-status = {editable = true,path = "."}
@@ -26,6 +25,6 @@ django-pymemcache = "*"
 allow_prereleases = true
 
 [scripts]
-test = "sh -c \"coverage erase && pytest && coverage html && echo Coverage report in /tmp/coverage_report/django-memcache-status/index.html\""
-cleanup = "sh -c \"isort -rc memcache_status && black --skip-string-normalization --line-length=80 --exclude='/(migrations)/' memcache_status\""
-testserver = "sh -c \"django-admin migrate --noinput && django-admin runserver\""
+test = "sh -c \"pytest\""
+cleanup = "sh -c \"ruff --fix memcache_status && black memcache_status\""
+runserver = "sh -c \"django-admin migrate --noinput && django-admin runserver\""

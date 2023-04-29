@@ -1,13 +1,12 @@
-from __future__ import unicode_literals
-
 from django.apps import AppConfig
+from django.http import HttpRequest
 
 
 class MemcacheStatusConfig(AppConfig):
-    name = 'memcache_status'
+    name = "memcache_status"
     verbose_name = "MemcacheStatus"
 
-    def show_cache_stats(self, request):
+    def show_cache_stats(self, request: HttpRequest) -> bool:
         """
         Memcache stats are only displayed to Users with `is_superuser`
         permission. You can overwrite this behavior using your custom

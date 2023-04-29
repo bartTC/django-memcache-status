@@ -1,2 +1,5 @@
 testdb.sqlite
 .static
+build
+dist
+*.egg-info
