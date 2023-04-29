@@ -107,7 +107,7 @@ To test a specific cache backend define it in the env variable::
 Changelog
 =========
 
-**v2.3 (2023-04-29):**
+**v2.3 (2023-04-30):**
 
 - Compatibility and tests for Django 3.2 to 4.2, and Python 3.11.
 - Dropped support for Django 2.2.
