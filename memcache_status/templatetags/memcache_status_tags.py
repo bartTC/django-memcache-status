@@ -81,7 +81,12 @@ class PrettyValue:
 
 
 @register.filter
-def memcache_status_pretty_name(name: str) -> str:
+def memcache_status_pretty_name(name: bytes | str) -> str:
+    try:
+        name = name.decode()
+    except AttributeError:
+        name = str(name)
+
     return " ".join([word.capitalize() for word in name.split("_")])
 
 
